@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  # back:
+  #   build:
+  #     context: ./back/
+  #   volumes:
+  #     - ./back/:/app/
+  #   networks:
+  #     - blog_network
+  # front:
+  #   build:
+  #     context: ./front/
+  #   volumes:
+  #     - ./front/:/app/
+  #   networks:
+  #     - blog_network
+  postgres:
+    image: postgres
+    networks: 
+      - blog_network
+    environment:
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" 
+  # nginx:
+  #   image: nginx
+  #   networks:
+  #     - blog_network
+  #   volumes:
+  #     - ./nginx/:/etc/nginx/conf.d/
+  #   ports:
+  #     - "80:80"
+networks:
+  blog_network:
+    driver: bridge
